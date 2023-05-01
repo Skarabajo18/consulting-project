@@ -1,0 +1,18 @@
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h3>Contact</h3>
+                {% if page.phone_number %}
+                    <p><i class="fa fa-phone"></i> {{ page.phone_number }}</p>
+                {% endif %}
+                {% if page.email %}
+                    <p><i class="fa fa-envelope"></i> {{ page.email }}</p>
+                {% endif %}
+                {% if page.address %}
+                    <p><i class="fa fa-map-marker"></i> {{ page.address }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</footer>
