@@ -1,16 +1,30 @@
 {% extends "base.html" %}
 {% load static wagtailcore_tags %}
 
-{% block body_class %}template-searchresults{% endblock %}
-
 {% block title %}Search{% endblock %}
 
 {% block content %}
-<h1>Search</h1>
+<style>
+    .card {
+  width: 260px;
+  height: 260px;
+  border-radius: 20px;
+  padding: 5px;
+  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+  background-image: linear-gradient(144deg,#AF40FF, #5B42F3 50%,#00DDEB);
+}
 
-<form action="{% url 'search' %}" method="get">
-    <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-    <input type="submit" value="Search" class="button">
+.card__content {
+  background: rgb(5, 6, 45);
+  border-radius: 17px;
+  width: 100%;
+  height: 100%;
+}
+</style>
+<h1 style="margin-bottom: 80px;">Busqueda</h1>
+<form action="{% url 'search' %}" method="get" class="input-group"style="max-width: 600px;margin-bottom: 10px;" >
+    <input type="text" class="form-control bg-transparent border-primary p-3" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+    <input type="submit" value="Search" class="btn btn-primary px-4">
 </form>
 
 {% if search_results %}
@@ -33,6 +47,11 @@
 <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
 {% endif %}
 {% elif search_query %}
-No results found
+<h3>No se encontró el resultado de "{{ search_query }}". )':</h3>
+<div class="card">
+    <div class="card__content">
+        <img width="250" height="250" src="https://nexbu.com/wp-content/uploads/2021/09/error_404_.gif" class="" style="padding: 5px; border-radius: 10%;">
+    </div>
+</div>
 {% endif %}
 {% endblock %}
